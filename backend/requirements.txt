@@ -36,3 +36,5 @@ mypy==1.11.2
 drf-yasg==1.21.7
 # Load testing
 locust==2.31.6
+# Test coverage
+coverage==7.6.1
