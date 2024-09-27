@@ -17,7 +17,7 @@ class CacheManager:
 
     @property
     def value(self) -> any:
-        return cache.get(self.key)
+        return None if self.key not in cache else cache.get(self.key)
 
     @property
     def period(self) -> int:
@@ -33,18 +33,12 @@ class CacheManager:
 
     @property
     def is_expired(self) -> bool:
-        try:
-            if cache.get(self.key) is not None:
-                return False
-            return True
-        except Exception as e:
-            logger.error(e)
-            return True
+        if self.key in cache:
+            return False
+        return True
 
     def delete(self) -> bool:
-        try:
+        if not self.is_expired:
             cache.delete(self.key)
             return True
-        except Exception as e:
-            logger.error(e)
-            return False
+        return False
