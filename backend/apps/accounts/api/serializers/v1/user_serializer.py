@@ -9,9 +9,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = "__all__"
         extra_kwargs = {
-            "password": {
-                "write_only": True,
-            }
+            "password": {"write_only": True},
+            "is_active": {"read_only": True},
+            "is_staff": {"read_only": True},
+            "is_superuser": {"read_only": True},
+            "is_admin": {"read_only": True},
         }
 
     def create(self, validated_data):
